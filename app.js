@@ -1,26 +1,19 @@
 const bodyParser=require("body-parser");
 const express=require("express");
 const app=express();
+const date=require(__dirname+"/date.js")
 app.set("view engine","ejs");
 let tasks=[];
 let workItems=[]
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static("public"))
 app.get('/',function(request,response){
-    const today=new Date();
-    const currentDay=today.getDay();
-    const options={
-       weekday:"long",
-       day:"numeric",
-       month:"long" 
-    }
-    const day=today.toLocaleDateString("en-US",options);
+    const day=date();
     response.render("list",{listTitle:day,listOfTasks:tasks});
 
 });
 app.post("/",function(req,res){
     const task=req.body.task;
-    console.log(req.body)
     if(req.body.list==="Work"){
         workItems.push(task);
         res.redirect("/work")
@@ -33,6 +26,9 @@ app.post("/",function(req,res){
 
 app.get("/work",function(req,res){
     res.render("list",{listTitle:"Work list",listOfTasks:workItems })
+})
+app.get("/about",function(req,res){
+    res.render("about")
 })
 /*
 app.post("/work",function(req,res){
