@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>toDoList</title>
+</head>
+<body>
+    <div class="box" id="heading">
+
+        <h1><%= kindOfday %></h1>
+    </div>
+    <div class="box">
+        <% for(let i=0;i < listOfTasks.length;i++){%>
+            
+            <div class="item">
+                    <input type="checkbox">
+                    <p><%= listOfTasks[i] %></li>
+                    </div>
+                        <%}%> 
+            <form class="item" action="/" method="post">
+               <label for="inputValue"></label>
+               <input id="inputValue" name="task" type="text" placeholder="New Task" autocomplete="off">
+               <button type="submit">+</button>
+            </form>
+    </div>
+</body>
+</html>
