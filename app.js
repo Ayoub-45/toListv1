@@ -20,17 +20,27 @@ app.get('/',function(request,response){
 });
 app.post("/",function(req,res){
     const task=req.body.task;
-    tasks.push(task)
-    res.redirect("/");
-})
+    console.log(req.body)
+    if(req.body.list==="Work"){
+        workItems.push(task);
+        res.redirect("/work")
+    }
+    else{
+        tasks.push(task)
+        res.redirect("/");
+    }
+    })
 
 app.get("/work",function(req,res){
-    res.render("list",{listTitle:"Work list",newListItems:workItems })
+    res.render("list",{listTitle:"Work list",listOfTasks:workItems })
 })
+/*
 app.post("/work",function(req,res){
-    let item=req.body.newItem;
-    workItems.push(item)
+    let task=req.body.task;
+    workItems.push(task)
+    res.redirect("/work")
 })
+*/
 app.listen(3000,function(){
     console.log("The server is running on port 3000");
 })
