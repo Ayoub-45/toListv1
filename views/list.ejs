@@ -4,17 +4,19 @@
         <h1><%= listTitle %></h1>
     </div>
     <div class="box">
-        <% for(let i=0;i < listOfTasks.length;i++){%>
-            
-            <div class="item">
-                    <input type="checkbox">
-                    <p><%= listOfTasks[i] %></li>
-                    </div>
-                        <%}%> 
+        <% listOfTasks.forEach(function(task){%>
+            <form action="/delete" method="post">
+                <div class="item">
+                    <input type="checkbox" name="checkbox" value="<%=task._id%>" onChange="this.form.submit()">
+                    <p><%= task.name%></p>   
+                </div>
+                <input type="hidden" name="listName" value="<%=listTitle%>"></form></input>
+                <%})%> 
+            </form>
             <form class="item" action="/" method="post">
                <label for="inputValue"></label>
                <input id="inputValue" name="task" type="text" placeholder="New Task" autocomplete="off">
-               <button type="submit" name="list" value=<%=listTitle%>>+</button>
+               <button type="submit" name="list" value="<%=listTitle%>">+</button>
             </form>
     </div>
     <%-include("footer")-%>
